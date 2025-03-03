@@ -107,36 +107,52 @@ public String obtenerCodigoDesdeCorreo(String correo) {
 
 
 
-public String validarcodigo(String correo, String codigo) {
-        PreparedStatement ps = null;
-        Connection con = getConnection();
-        boolean codigovalido = false;
-        ResultSet res = null;
-        String query =" SELECT codigo FROM recuperacion WHERE codigo= ? and correo_electronico = ?";
+public boolean validarcodigo(String correo, String codigo) {
+    PreparedStatement ps = null;
+    Connection con = getConnection();
+    ResultSet res = null;
+    boolean codigovalido = false; 
 
-        try {
-            ps = con.prepareStatement(query);
-            ps.setString(1, correo);
-            ps.setString(2, codigo);
-            res = ps.executeQuery();
+    String query = "SELECT codigo FROM recuperacion WHERE codigo = ? AND correo_electronico = ?";
 
-             if (res.next()) {
+    try {
+        ps = con.prepareStatement(query);
+        ps.setString(1, codigo); 
+        ps.setString(2, correo); 
+        res = ps.executeQuery();
+
+        if (res.next()) {
             codigovalido = true;
-            System.out.println("codigo validado: " + codigovalido);
+            System.out.println("Código validado: " + codigovalido);
         } else {
-            System.out.println("codigo invalido");
+            System.out.println("Código inválido");
         }
-        } catch (SQLException ex) {
-            Logger.getLogger(Consulta_Usuarios.class.getName()).log(Level.SEVERE, null, ex);
-        } finally {
-            try { if (res != null) res.close(); } catch (SQLException ex) {}
-            try { if (ps != null) ps.close(); } catch (SQLException ex) {}
-          
-        }
-        return null;
+    } catch (SQLException ex) {
+        Logger.getLogger(Consulta_Usuarios.class.getName()).log(Level.SEVERE, null, ex);
+    } finally {
+        try { if (res != null) res.close(); } catch (SQLException ex) {}
+        try { if (ps != null) ps.close(); } catch (SQLException ex) {}
+    }
+
+    return codigovalido; 
 }
 
+public boolean actualizarContrasena(String correo, String nuevaContrasena) {
 
+  Connection con = getConnection();
+    String sql = "UPDATE usuario SET contrasena = ? WHERE correo_electronico = ?";
+
+    try {
+        PreparedStatement ps = con.prepareStatement(sql);
+        ps.setString(1, nuevaContrasena); 
+        ps.setString(2, correo);
+        int resultado = ps.executeUpdate();
+        return resultado > 0;
+    } catch (SQLException e) {
+        System.out.println("Error al actualizar la contraseña: " + e);
+        return false;
+    }
+}
 
 
     

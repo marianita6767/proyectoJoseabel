@@ -13,15 +13,16 @@ import modelo.Consulta_Usuarios;
  *
  * @author Personal
  */
-public class Contrasena extends javax.swing.JFrame {
 
+public class Contrasena extends javax.swing.JFrame {
+    
+  public Contrasena() {
     /**
      * Creates new form Contrasena
      */
-    public Contrasena() {
+    
         initComponents();
-          initComponents();
-        this.setResizable(false);
+       this.setResizable(false);
         this.setLocationRelativeTo(null);
         this.setTitle("CARPINTERIA JOSE ABEL");
         
@@ -54,7 +55,7 @@ public class Contrasena extends javax.swing.JFrame {
         jLabel2.setFont(new java.awt.Font("SansSerif", 0, 30)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("Restablece la contraseña");
-        jPanel9.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 10, 340, 50));
+        jPanel9.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 10, 370, 50));
 
         jLabel5.setFont(new java.awt.Font("SansSerif", 0, 18)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(255, 255, 255));
@@ -94,7 +95,11 @@ public class Contrasena extends javax.swing.JFrame {
         jPanel9.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 130, 500, 20));
 
         txtcorreo.setFont(new java.awt.Font("SansSerif", 0, 18)); // NOI18N
-        txtcorreo.setText("yurimallerlygomezlizcano@gmail.com");
+        txtcorreo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtcorreoActionPerformed(evt);
+            }
+        });
         jPanel9.add(txtcorreo, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 270, 480, 40));
 
         jPanel8.add(jPanel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 30, 520, 580));
@@ -111,41 +116,48 @@ public class Contrasena extends javax.swing.JFrame {
     }//GEN-LAST:event_jLabel5MousePressed
 
     private void continuarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_continuarActionPerformed
-   if (txtcorreo == null) {
-            System.out.println("ERROR: txtcorreo es NULL.");
-            return;
-        }
-        
-        String correo = txtcorreo.getText().trim();
-        System.out.println("Correo ingresado: '" + correo + "'");
+    if (txtcorreo == null) {
+        System.out.println("ERROR: txtcorreo es NULL.");
+        return;
+    }
+    
+    String correo = txtcorreo.getText().trim();
+    
+    if (correo.isEmpty()) {
+        JOptionPane.showMessageDialog(this, "Por favor, ingrese un correo válido.");
+        return;
+    }
 
-        if (correo.isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Por favor, ingrese un correo válido.");
-            return;
-        }
+    Ctrl_Usuarios ctrl = new Ctrl_Usuarios();
+    Consulta_Usuarios consulta_Usuarios = new Consulta_Usuarios();
+    String usuario = consulta_Usuarios.obtenerCodigoDesdeCorreo(correo);
 
-        Ctrl_Usuarios ctrl = new Ctrl_Usuarios();
-        Consulta_Usuarios consulta_Usuarios = new Consulta_Usuarios();
-        String usuario = consulta_Usuarios.obtenerCodigoDesdeCorreo(correo);
-
-        if (usuario != null) {
-            boolean enviado = ctrl.enviarCodigoRecuperacion(usuario, correo);
-            if (enviado) {
-                txtcorreo.setText("");
-                JOptionPane.showMessageDialog(this, "Código enviado con éxito.");
-                
-                Codigo con = new Codigo();
-                con.setVisible(true);
-                this.dispose();
-            } else {
-                JOptionPane.showMessageDialog(this, "No se pudo enviar el código.");
-            }
+    if (usuario != null) {
+        boolean enviado = ctrl.enviarCodigoRecuperacion(usuario, correo);
+        if (enviado) {
+            txtcorreo.setText("");
+            JOptionPane.showMessageDialog(this, "Código enviado con éxito.");
+            
+       
+            Codigo con = new Codigo();
+            con.setcorreoIngresado(correo);
+            con.setVisible(true);
+            this.dispose();
+            
         } else {
-            JOptionPane.showMessageDialog(this, "El correo no está registrado.");
+            JOptionPane.showMessageDialog(this, "No se pudo enviar el código.");
         }
+    } else {
+        JOptionPane.showMessageDialog(this, "El correo no está registrado.");
+    }
+
     
      
     }//GEN-LAST:event_continuarActionPerformed
+
+    private void txtcorreoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtcorreoActionPerformed
+    
+    }//GEN-LAST:event_txtcorreoActionPerformed
 
     /**
      * @param args the command line arguments
