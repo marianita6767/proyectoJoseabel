@@ -1,21 +1,37 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
+
 package vista;
+
+import javax.swing.JOptionPane;
+import controlador.Ctrl_Usuarios;
+
+import modelo.Consulta_Usuarios;
 
 /**
  *
  * @author Personal
  */
 public class Codigo extends javax.swing.JFrame {
-
+    
+    private String correoIngresado= "";
+  public Codigo() {
+    /**
+     * Creates new form Contrasena
+     */
+    
+        initComponents();
+       this.setResizable(false);
+        this.setLocationRelativeTo(null);
+        this.setTitle("CARPINTERIA JOSE ABEL");
     /**
      * Creates new form Codigo
      */
-    public Codigo() {
-        initComponents();
+  
     }
+  
+  
+  public void setcorreoIngresado(String correo){
+      this.correoIngresado=correo;
+  }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -31,7 +47,7 @@ public class Codigo extends javax.swing.JFrame {
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        txtcorreo = new javax.swing.JTextField();
+        txtcodigo = new javax.swing.JTextField();
         rSButton1 = new rojeru_san.RSButton();
         jLabel5 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
@@ -51,26 +67,31 @@ public class Codigo extends javax.swing.JFrame {
         jLabel6.setFont(new java.awt.Font("SansSerif", 0, 16)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(255, 255, 255));
         jLabel6.setText("Reenviar codigo");
-        jLabel6.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
+        jLabel6.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jLabel6.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 jLabel6MousePressed(evt);
             }
         });
-        jPanel9.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 320, 230, 20));
+        jPanel9.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 320, 120, 20));
 
         jLabel7.setFont(new java.awt.Font("SansSerif", 0, 30)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(255, 255, 255));
         jLabel7.setText("Comprueba tu bandeja de entrada");
-        jPanel9.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 70, 460, 40));
+        jPanel9.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 70, 470, 40));
 
         jLabel4.setFont(new java.awt.Font("SansSerif", 0, 17)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(255, 255, 255));
         jLabel4.setText("deseados");
         jPanel9.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 450, 80, 20));
 
-        txtcorreo.setFont(new java.awt.Font("SansSerif", 0, 18)); // NOI18N
-        jPanel9.add(txtcorreo, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 270, 450, 40));
+        txtcodigo.setFont(new java.awt.Font("SansSerif", 0, 18)); // NOI18N
+        txtcodigo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtcodigoActionPerformed(evt);
+            }
+        });
+        jPanel9.add(txtcodigo, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 270, 450, 40));
 
         rSButton1.setBackground(new java.awt.Color(204, 204, 204));
         rSButton1.setText("Continuar");
@@ -91,17 +112,18 @@ public class Codigo extends javax.swing.JFrame {
         jLabel8.setFont(new java.awt.Font("SansSerif", 0, 17)); // NOI18N
         jLabel8.setForeground(new java.awt.Color(255, 255, 255));
         jLabel8.setText("Introducir otra direccion de correo electronico");
+        jLabel8.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jLabel8.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 jLabel8MousePressed(evt);
             }
         });
-        jPanel9.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 550, 340, 20));
+        jPanel9.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 550, 360, 20));
 
         jLabel9.setFont(new java.awt.Font("SansSerif", 0, 17)); // NOI18N
         jLabel9.setForeground(new java.awt.Color(255, 255, 255));
         jLabel9.setText("¿no has recibido el correo? verifica la carpeta de correos no");
-        jPanel9.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 430, 450, 20));
+        jPanel9.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 430, 460, 20));
 
         getContentPane().add(jPanel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 570, 630));
 
@@ -109,20 +131,67 @@ public class Codigo extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jLabel6MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel6MousePressed
-     ////
+     if (correoIngresado != null && !correoIngresado.isEmpty()) {
+            Ctrl_Usuarios controlador = new Ctrl_Usuarios();
+            String usuario = new Consulta_Usuarios().obtenerCodigoDesdeCorreo(correoIngresado);
+            
+            if (usuario != null) {
+                boolean enviado = controlador.enviarCodigoRecuperacion(usuario, correoIngresado);
+                if (enviado) {
+                    JOptionPane.showMessageDialog(this, "Código reenviado a: " + correoIngresado);
+                } else {
+                    JOptionPane.showMessageDialog(this, "Error al reenviar el código.");
+                }
+            } else {
+                JOptionPane.showMessageDialog(this, "No se encontró usuario con ese correo.");
+            }
+        } else {
+            JOptionPane.showMessageDialog(this, "No se ha ingresado un correo válido.");
+     
+    } 
      
      
     }//GEN-LAST:event_jLabel6MousePressed
 
     private void rSButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rSButton1ActionPerformed
-        // TODO add your handling code here:
+if (correoIngresado == null || correoIngresado.isEmpty()) {
+    JOptionPane.showMessageDialog(this, "Error: No se ha ingresado un correo válido.");
+    return;
+}
+        
+        
+        String codigo = txtcodigo.getText().trim();
+
+    if (codigo.isEmpty()) {
+        JOptionPane.showMessageDialog(this, "Error, debe ingresar el código que le enviamos al correo " + correoIngresado);
+        return;
+    }
+
+    if (!codigo.matches("\\d{6}")) {
+        JOptionPane.showMessageDialog(this, "El código debe tener exactamente 6 dígitos.");
+        return;
+    }
+
+    Consulta_Usuarios consulta = new Consulta_Usuarios();
+    boolean codigoValido = consulta.validarcodigo(correoIngresado, codigo);
+
+  if (codigoValido) {
+    JOptionPane.showMessageDialog(this, "Código validado correctamente. Ahora puedes cambiar tu contraseña.");
+    Nueva_contrasena nuevaVentana = new Nueva_contrasena();
+    nuevaVentana.setVisible(true);
+    this.dispose();
+}
     }//GEN-LAST:event_rSButton1ActionPerformed
 
     private void jLabel8MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel8MousePressed
-      Contrasena con = new Contrasena();
-      con.setVisible(true);
-          dispose();
+Contrasena con = new Contrasena();
+    con.setVisible(true);
+    this.dispose();
     }//GEN-LAST:event_jLabel8MousePressed
+
+    private void txtcodigoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtcodigoActionPerformed
+  
+    }//GEN-LAST:event_txtcodigoActionPerformed
 
     /**
      * @param args the command line arguments
@@ -169,6 +238,6 @@ public class Codigo extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel9;
     private rojeru_san.RSButton rSButton1;
-    private javax.swing.JTextField txtcorreo;
+    private javax.swing.JTextField txtcodigo;
     // End of variables declaration//GEN-END:variables
 }

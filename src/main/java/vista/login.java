@@ -108,7 +108,7 @@ public class login extends javax.swing.JFrame {
                 rSMaterialButtonRectangle1ActionPerformed(evt);
             }
         });
-        jPanel6.add(rSMaterialButtonRectangle1, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 380, 190, 50));
+        jPanel6.add(rSMaterialButtonRectangle1, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 380, 190, 50));
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 15)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(29, 30, 51));
@@ -122,8 +122,21 @@ public class login extends javax.swing.JFrame {
         jPanel6.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 310, 180, 20));
 
         passtxt.setForeground(new java.awt.Color(204, 204, 204));
-        passtxt.setText("rSPasswordTwo1");
+        passtxt.setText("********");
+        passtxt.setToolTipText("");
         passtxt.setBorderColor(new java.awt.Color(204, 204, 204));
+        passtxt.setPhColor(new java.awt.Color(204, 204, 204));
+        passtxt.setPlaceholder("passtxtpasstxt");
+        passtxt.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                passtxtFocusGained(evt);
+            }
+        });
+        passtxt.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                passtxtMousePressed(evt);
+            }
+        });
         passtxt.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 passtxtActionPerformed(evt);
@@ -139,12 +152,12 @@ public class login extends javax.swing.JFrame {
         jLabel3.setFont(new java.awt.Font("Segoe UI Black", 0, 24)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setText("CARPINTERIA");
-        jPanel8.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 170, -1, -1));
+        jPanel8.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 230, -1, -1));
 
         jLabel1.setFont(new java.awt.Font("Segoe UI Black", 0, 24)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("JOSE ABEL");
-        jPanel8.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 200, -1, -1));
+        jPanel8.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 260, -1, -1));
 
         getContentPane().add(jPanel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 310, 540));
 
@@ -160,15 +173,23 @@ public class login extends javax.swing.JFrame {
     }//GEN-LAST:event_rSMaterialButtonRectangle1ActionPerformed
 
     private void jLabel2MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel2MousePressed
-     
-        Contrasena contra= new Contrasena();
+    Contrasena contra= new Contrasena();
         contra.setVisible(true); 
-        this.dispose();
+        this.dispose();     
+  
     }//GEN-LAST:event_jLabel2MousePressed
 
     private void passtxtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_passtxtActionPerformed
         
     }//GEN-LAST:event_passtxtActionPerformed
+
+    private void passtxtMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_passtxtMousePressed
+     
+    }//GEN-LAST:event_passtxtMousePressed
+
+    private void passtxtFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_passtxtFocusGained
+       passtxt.setText("");
+    }//GEN-LAST:event_passtxtFocusGained
 
     /**
      * @param args the command line arguments
