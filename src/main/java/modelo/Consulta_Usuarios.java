@@ -138,25 +138,37 @@ public boolean validarcodigo(String correo, String codigo) {
 }
 
 public boolean actualizarContrasena(String correo, String nuevaContrasena) {
+    PreparedStatement ps = null;
+    Connection con = getConnection(); 
+    boolean actualizado = false;
 
-  Connection con = getConnection();
-    String sql = "UPDATE usuario SET contrasena = ? WHERE correo_electronico = ?";
+    String query = "UPDATE usuario SET contrasena = ? WHERE correo_electronico = ?";
 
     try {
-        PreparedStatement ps = con.prepareStatement(sql);
-        ps.setString(1, nuevaContrasena); 
+        ps = con.prepareStatement(query);
+        ps.setString(1, nuevaContrasena);
         ps.setString(2, correo);
-        int resultado = ps.executeUpdate();
-        return resultado > 0;
-    } catch (SQLException e) {
-        System.out.println("Error al actualizar la contraseña: " + e);
-        return false;
+
+        int filasAfectadas = ps.executeUpdate();
+        if (filasAfectadas > 0) {
+            actualizado = true;
+            System.out.println("Contraseña actualizada correctamente.");
+        } else {
+            System.out.println("Error: No se encontró el usuario con ese correo.");
+        }
+    } catch (SQLException ex) {
+        Logger.getLogger(Consulta_Usuarios.class.getName()).log(Level.SEVERE, "Error SQL al actualizar contraseña", ex);
+    } finally {
+        try { if (ps != null) ps.close(); } catch (SQLException ex) {}
     }
+
+    return actualizado;
+
+}
 }
 
 
     
-}
 
     
 

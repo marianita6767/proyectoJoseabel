@@ -15,7 +15,7 @@ import modelo.Consulta_Usuarios;
  */
 
 public class Nueva_contrasena extends javax.swing.JFrame {
-    
+    private String correoIngresado= "";
   public Nueva_contrasena() {
     /**
      * Creates new form Contrasena
@@ -149,7 +149,22 @@ public class Nueva_contrasena extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void continuarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_continuarActionPerformed
-  
+   String nuevaContrasena = txtNuevaContrasena.getText().trim();
+
+
+
+   
+    Consulta_Usuarios consulta = new Consulta_Usuarios();
+    boolean actualizada = consulta.actualizarContrasena(correoIngresado, nuevaContrasena);
+
+    if (actualizada) {
+        JOptionPane.showMessageDialog(this, "Contraseña actualizada con éxito.");
+        login lg = new login();
+       lg.setVisible(true);
+         dispose();
+    } else {
+        JOptionPane.showMessageDialog(this, "Error al actualizar la contraseña.");
+    }  
     
      
     }//GEN-LAST:event_continuarActionPerformed
@@ -159,9 +174,7 @@ public class Nueva_contrasena extends javax.swing.JFrame {
     }//GEN-LAST:event_txtNuevaContrasenaActionPerformed
 
     private void jLabel15MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel15MousePressed
-        login lg = new login();
-        lg.setVisible(true);
-        dispose();
+
     }//GEN-LAST:event_jLabel15MousePressed
 
     /**
@@ -217,4 +230,7 @@ public class Nueva_contrasena extends javax.swing.JFrame {
     private rojerusan.RSButtonPane rSButtonPane1;
     private javax.swing.JTextField txtNuevaContrasena;
     // End of variables declaration//GEN-END:variables
+
+
+
 }
