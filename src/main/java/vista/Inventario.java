@@ -47,39 +47,27 @@ public class Inventario extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        btnMateriales = new rojeru_san.RSButtonRiple();
-        btnProductos = new rojeru_san.RSButtonRiple();
+        btnHerramientas = new rojeru_san.RSButtonRiple();
         btnMovimientos = new rojeru_san.RSButtonRiple();
         panelprincipal = new javax.swing.JPanel();
+        btnMateriales = new rojeru_san.RSButtonRiple();
 
-        setBackground(new java.awt.Color(228, 233, 247));
+        setBackground(new java.awt.Color(237, 241, 255));
         setToolTipText("");
         setMaximumSize(new java.awt.Dimension(32767, 32));
         setPreferredSize(new java.awt.Dimension(1015, 690));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        btnMateriales.setBackground(new java.awt.Color(0, 0, 0));
-        btnMateriales.setIcon(new javax.swing.ImageIcon(getClass().getResource("/box.png"))); // NOI18N
-        btnMateriales.setText("  Materiales");
-        btnMateriales.setFont(new java.awt.Font("Roboto Bold", 1, 15)); // NOI18N
-        btnMateriales.addActionListener(new java.awt.event.ActionListener() {
+        btnHerramientas.setBackground(new java.awt.Color(0, 0, 0));
+        btnHerramientas.setIcon(new javax.swing.ImageIcon(getClass().getResource("/wrench.png"))); // NOI18N
+        btnHerramientas.setText("Herramientas");
+        btnHerramientas.setFont(new java.awt.Font("Roboto Bold", 1, 15)); // NOI18N
+        btnHerramientas.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnMaterialesActionPerformed(evt);
+                btnHerramientasActionPerformed(evt);
             }
         });
-        add(btnMateriales, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 20, 170, 40));
-
-        btnProductos.setBackground(new java.awt.Color(0, 0, 0));
-        btnProductos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/tienda-de-comestibles.png"))); // NOI18N
-        btnProductos.setText("  Productos terminados");
-        btnProductos.setToolTipText("");
-        btnProductos.setFont(new java.awt.Font("Roboto Bold", 1, 15)); // NOI18N
-        btnProductos.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnProductosActionPerformed(evt);
-            }
-        });
-        add(btnProductos, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 20, 250, -1));
+        add(btnHerramientas, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 20, 180, 40));
 
         btnMovimientos.setBackground(new java.awt.Color(0, 0, 0));
         btnMovimientos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/transfer.png"))); // NOI18N
@@ -90,19 +78,65 @@ public class Inventario extends javax.swing.JPanel {
                 btnMovimientosActionPerformed(evt);
             }
         });
-        add(btnMovimientos, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 20, 210, -1));
+        add(btnMovimientos, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 20, 190, -1));
 
-        panelprincipal.setBackground(new java.awt.Color(228, 233, 247));
+        panelprincipal.setBackground(new java.awt.Color(237, 241, 255));
         panelprincipal.setPreferredSize(new java.awt.Dimension(960, 570));
-        add(panelprincipal, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 90, 960, 570));
+        add(panelprincipal, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 80, 970, 580));
+
+        btnMateriales.setBackground(new java.awt.Color(0, 0, 0));
+        btnMateriales.setIcon(new javax.swing.ImageIcon(getClass().getResource("/box.png"))); // NOI18N
+        btnMateriales.setText("  Materiales");
+        btnMateriales.setFont(new java.awt.Font("Roboto Bold", 1, 15)); // NOI18N
+        btnMateriales.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnMaterialesActionPerformed(evt);
+            }
+        });
+        add(btnMateriales, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, 170, 40));
     }// </editor-fold>//GEN-END:initComponents
     
     
-    private void btnMaterialesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMaterialesActionPerformed
+    private void btnHerramientasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHerramientasActionPerformed
         // TODO add your handling code here:
-         if(!this.btnMateriales.isSelected()) {
-    this.btnMateriales.setSelected(true);   
-      this.btnProductos.setSelected(false);
+         if(!this.btnHerramientas.isSelected()) {
+    this.btnMateriales.setSelected(false);  
+    this.btnHerramientas.setSelected(true);  
+      this.btnMovimientos.setSelected(false);
+        
+        herramientas h = new herramientas();
+        h.setSize(1000, 490);
+        h.setLocation(0,0);
+        
+        panelprincipal.removeAll();
+        panelprincipal.add(h);
+        panelprincipal.revalidate();
+        panelprincipal.repaint();
+
+         }
+    }//GEN-LAST:event_btnHerramientasActionPerformed
+
+    private void btnMovimientosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMovimientosActionPerformed
+            if(!this.btnMovimientos.isSelected()) {
+    this.btnMateriales.setSelected(false);  
+    this.btnHerramientas.setSelected(false);  
+      this.btnMovimientos.setSelected(true);
+      
+        movimientos es = new movimientos();
+        es.setSize(1000, 490);
+        es.setLocation(0,0);
+        
+        panelprincipal.removeAll();
+        panelprincipal.add(es);
+        panelprincipal.revalidate();
+        panelprincipal.repaint();
+            }
+    }//GEN-LAST:event_btnMovimientosActionPerformed
+
+    private void btnMaterialesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMaterialesActionPerformed
+      if(!this.btnMateriales.isSelected()) {
+    this.btnMateriales.setSelected(true);  
+    this.btnHerramientas.setSelected(false);  
       this.btnMovimientos.setSelected(false);
         
         materiales es = new materiales();
@@ -117,19 +151,11 @@ public class Inventario extends javax.swing.JPanel {
          }
     }//GEN-LAST:event_btnMaterialesActionPerformed
 
-    private void btnProductosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnProductosActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnProductosActionPerformed
-
-    private void btnMovimientosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMovimientosActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnMovimientosActionPerformed
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private rojeru_san.RSButtonRiple btnHerramientas;
     private rojeru_san.RSButtonRiple btnMateriales;
     private rojeru_san.RSButtonRiple btnMovimientos;
-    private rojeru_san.RSButtonRiple btnProductos;
     private javax.swing.JPanel panelprincipal;
     // End of variables declaration//GEN-END:variables
 

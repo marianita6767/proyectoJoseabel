@@ -73,10 +73,10 @@
             <Component class="rojeru_san.RSButtonRiple" name="rSButtonRiple1">
               <Properties>
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                  <Color blue="33" green="0" red="ff" type="rgb"/>
+                  <Color blue="bc" green="ae" red="f2" type="rgb"/>
                 </Property>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="3" name="/delete (1).png"/>
+                  <Image iconType="3" name="/delete (6).png"/>
                 </Property>
               </Properties>
               <Events>
@@ -139,10 +139,10 @@
             <Component class="rojeru_san.RSButtonRiple" name="rSButtonRiple2">
               <Properties>
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                  <Color blue="66" green="cc" red="0" type="rgb"/>
+                  <Color blue="c1" green="e1" red="bc" type="rgb"/>
                 </Property>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="3" name="/eye (1).png"/>
+                  <Image iconType="3" name="/view (1).png"/>
                 </Property>
               </Properties>
               <Events>
@@ -157,10 +157,10 @@
             <Component class="rojeru_san.RSButtonRiple" name="rSButtonRiple3">
               <Properties>
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                  <Color blue="ff" green="99" red="0" type="rgb"/>
+                  <Color blue="f5" green="c7" red="a6" type="rgb"/>
                 </Property>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="3" name="/pencil (1)_1.png"/>
+                  <Image iconType="3" name="/edit.png"/>
                 </Property>
               </Properties>
               <Events>
