@@ -76,8 +76,8 @@ public class herramientas extends javax.swing.JPanel {
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/mdfimg.jpeg"))); // NOI18N
         jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, 170));
 
-        rSButtonRiple1.setBackground(new java.awt.Color(255, 0, 51));
-        rSButtonRiple1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/delete (1).png"))); // NOI18N
+        rSButtonRiple1.setBackground(new java.awt.Color(242, 174, 188));
+        rSButtonRiple1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/delete (6).png"))); // NOI18N
         rSButtonRiple1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 rSButtonRiple1ActionPerformed(evt);
@@ -100,8 +100,8 @@ public class herramientas extends javax.swing.JPanel {
         jLabel4.setText("Nombre: Mdf");
         jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 200, -1, -1));
 
-        rSButtonRiple2.setBackground(new java.awt.Color(0, 204, 102));
-        rSButtonRiple2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/eye (1).png"))); // NOI18N
+        rSButtonRiple2.setBackground(new java.awt.Color(188, 225, 193));
+        rSButtonRiple2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view (1).png"))); // NOI18N
         rSButtonRiple2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 rSButtonRiple2ActionPerformed(evt);
@@ -109,8 +109,8 @@ public class herramientas extends javax.swing.JPanel {
         });
         jPanel1.add(rSButtonRiple2, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 270, 40, 20));
 
-        rSButtonRiple3.setBackground(new java.awt.Color(0, 153, 255));
-        rSButtonRiple3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pencil (1)_1.png"))); // NOI18N
+        rSButtonRiple3.setBackground(new java.awt.Color(166, 199, 245));
+        rSButtonRiple3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/edit.png"))); // NOI18N
         rSButtonRiple3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 rSButtonRiple3ActionPerformed(evt);

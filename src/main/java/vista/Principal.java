@@ -5,6 +5,8 @@
 package vista;
 
 import java.awt.BorderLayout;
+import java.awt.Dimension;
+import java.awt.Toolkit;
 import java.io.File;
 import java.net.URL;
 import javax.swing.Icon;
@@ -34,7 +36,6 @@ public class Principal extends javax.swing.JFrame {
         contenedor.revalidate();
         contenedor.repaint();
 
-        
     }
 
 
@@ -55,7 +56,6 @@ public class Principal extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         dos = new rojeru_san.RSButton();
-        rSButton3 = new rojeru_san.RSButton();
         uno = new rojeru_san.RSButton();
         tres = new rojeru_san.RSButton();
         cuatro = new rojeru_san.RSButton();
@@ -106,18 +106,6 @@ public class Principal extends javax.swing.JFrame {
         });
         jPanel3.add(dos, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 240, 260, 60));
 
-        rSButton3.setBackground(new java.awt.Color(29, 30, 51));
-        rSButton3.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        rSButton3.setText("Gestion de usuarios");
-        rSButton3.setColorHover(new java.awt.Color(128, 128, 128));
-        rSButton3.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        rSButton3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                rSButton3ActionPerformed(evt);
-            }
-        });
-        jPanel3.add(rSButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 600, 260, 60));
-
         uno.setBackground(new java.awt.Color(29, 30, 51));
         uno.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         uno.setIcon(new javax.swing.ImageIcon(getClass().getResource("/transfer.png"))); // NOI18N
@@ -134,7 +122,7 @@ public class Principal extends javax.swing.JFrame {
 
         tres.setBackground(new java.awt.Color(29, 30, 51));
         tres.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        tres.setText("Equipamiento");
+        tres.setText("Gestion de proveedores");
         tres.setColorHover(new java.awt.Color(128, 128, 128));
         tres.setColorTextHover(new java.awt.Color(0, 0, 0));
         tres.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
@@ -147,7 +135,7 @@ public class Principal extends javax.swing.JFrame {
 
         cuatro.setBackground(new java.awt.Color(29, 30, 51));
         cuatro.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        cuatro.setText("Gestion de clientes");
+        cuatro.setText("Producción");
         cuatro.setColorHover(new java.awt.Color(200, 200, 200));
         cuatro.setColorTextHover(new java.awt.Color(0, 0, 0));
         cuatro.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
@@ -160,7 +148,7 @@ public class Principal extends javax.swing.JFrame {
 
         cinco.setBackground(new java.awt.Color(29, 30, 51));
         cinco.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        cinco.setText("Gestion de proveedores");
+        cinco.setText("Ventas");
         cinco.setColorHover(new java.awt.Color(128, 128, 128));
         cinco.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         cinco.addActionListener(new java.awt.event.ActionListener() {
@@ -182,7 +170,7 @@ public class Principal extends javax.swing.JFrame {
 
         seis.setBackground(new java.awt.Color(29, 30, 51));
         seis.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        seis.setText("  Gestion de pedidos");
+        seis.setText("Caja");
         seis.setColorHover(new java.awt.Color(128, 128, 128));
         seis.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         seis.addActionListener(new java.awt.event.ActionListener() {
@@ -194,7 +182,7 @@ public class Principal extends javax.swing.JFrame {
 
         siete.setBackground(new java.awt.Color(29, 30, 51));
         siete.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        siete.setText("Caja");
+        siete.setText("Gestion de usuarios");
         siete.setColorHover(new java.awt.Color(128, 128, 128));
         siete.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         siete.addActionListener(new java.awt.event.ActionListener() {
@@ -226,16 +214,11 @@ public class Principal extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 1556, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 822, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         pack();
@@ -301,15 +284,7 @@ public class Principal extends javax.swing.JFrame {
             this.cinco.setSelected(false);
                this.seis.setSelected(false);
                   this.siete.setSelected(false);
-        
-        Equipamiento eq = new Equipamiento();
-        eq.setSize(1200,730);
-        eq.setLocation(0,0);
-        
-        contenedor.removeAll();
-        contenedor.add(eq);
-        contenedor.revalidate();
-        contenedor.repaint();   
+
           }            
            
     }//GEN-LAST:event_tresActionPerformed
@@ -335,11 +310,6 @@ public class Principal extends javax.swing.JFrame {
    
   }   
     }//GEN-LAST:event_unoActionPerformed
-
-    private void rSButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rSButton3ActionPerformed
-           
-                  
-    }//GEN-LAST:event_rSButton3ActionPerformed
 
     private void dosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dosActionPerformed
        if(!this.dos.isSelected()) {
@@ -427,7 +397,6 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private rojeru_san.RSButton menu;
-    private rojeru_san.RSButton rSButton3;
     private rojeru_san.RSButton seis;
     private rojeru_san.RSButton siete;
     private rojeru_san.RSButton tres;

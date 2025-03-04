@@ -4,14 +4,24 @@
  */
 package vista;
 
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.FlowLayout;
+import java.awt.Font;
+import java.awt.GridBagLayout;
 import java.awt.GridLayout;
+import java.awt.List;
+import java.util.ArrayList;
 import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
+import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+import javax.swing.SwingConstants;
+import modelo.MaterialDatos;
 
 /**
  *
@@ -22,39 +32,94 @@ public class materiales extends javax.swing.JPanel {
     /**
      * Creates new form materiales
      */
+    
     public materiales() {
         initComponents();
-        
-        setLayout(new GridLayout(0, 1, 10, 10)); // Diseño de tarjetas en columnas
+     principalPanel.setLayout(new FlowLayout(FlowLayout.LEFT, 10, 10));
     }
+    
 
         // Método para agregar una nueva tarjeta
-    public void agregarTarjeta(String codigo, String nombre, String descripcion, String categoria, 
-                               String unidad, int cantidad, String proveedor, ImageIcon imagen) {
-        JPanel tarjeta = new JPanel();
-        tarjeta.setLayout(new BoxLayout(tarjeta, BoxLayout.Y_AXIS));
-        tarjeta.setBorder(BorderFactory.createTitledBorder(nombre));
+    public void agregarMaterial(MaterialDatos material) {
+    
+        
+    JPanel tarjeta = new JPanel(new BorderLayout());
+    tarjeta.setPreferredSize(new Dimension(210, 308)); // Ancho: 200, Alto: 300
+    tarjeta.setBorder(BorderFactory.createLineBorder(Color.GRAY));
 
-        JLabel lblCodigo = new JLabel("Código: " + codigo);
-        JLabel lblDescripcion = new JLabel("Descripción: " + descripcion);
-        JLabel lblCategoria = new JLabel("Categoría: " + categoria);
-        JLabel lblUnidad = new JLabel("Unidad: " + unidad);
-        JLabel lblCantidad = new JLabel("Cantidad: " + cantidad);
-        JLabel lblProveedor = new JLabel("Proveedor: " + proveedor);
-        JLabel lblImagen = new JLabel(imagen);
+   // JPanel para la imagen
+        JPanel panelImagen = new JPanel(new GridBagLayout());
+        panelImagen.setPreferredSize(new Dimension(210, 197));
+        panelImagen.setBackground(Color.WHITE);
+        
+        JLabel lblImagen = new JLabel();
+        if (material.getImagen() != null) {
+            lblImagen.setIcon(material.getImagen());
+        } else {
+            lblImagen.setText("No imagen");
+        }
+        panelImagen.add(lblImagen);
+        tarjeta.add(panelImagen, BorderLayout.NORTH);
 
-        tarjeta.add(lblCodigo);
-        tarjeta.add(lblDescripcion);
-        tarjeta.add(lblCategoria);
-        tarjeta.add(lblUnidad);
-        tarjeta.add(lblCantidad);
-        tarjeta.add(lblProveedor);
-        tarjeta.add(lblImagen);
+    
+        // JPanel para la información
+    JPanel panelInfo = new JPanel(new GridLayout(3, 1));
+    panelInfo.setBackground(new Color(46,49,82)); // Color de fondo azul oscuro
+    Font fuenteInfo = new Font("Segoe UI", Font.PLAIN, 15); // Fuente Arial, negrita, tamaño 16
 
-        add(tarjeta);
-        revalidate();
-        repaint();
-    }
+
+    JLabel lblCodigo = new JLabel("Código: " + material.getCodigo());
+    lblCodigo.setForeground(Color.WHITE);
+    lblCodigo.setFont(fuenteInfo); // Establece la fuente
+    lblCodigo.setHorizontalAlignment(SwingConstants.CENTER);
+    panelInfo.add(lblCodigo);
+    
+    JLabel lblNombre = new JLabel("Nombre: " + material.getNombre());
+    lblNombre.setForeground(Color.WHITE);
+    lblNombre.setFont(fuenteInfo); // Establece la fuente
+    lblNombre.setHorizontalAlignment(SwingConstants.CENTER);
+    panelInfo.add(lblNombre);
+    
+    JLabel lblCategoria = new JLabel("Categoría: " + material.getCategoria());
+    lblCategoria.setForeground(Color.WHITE);
+    lblCategoria.setFont(fuenteInfo); // Establece la fuente
+    lblCategoria.setHorizontalAlignment(SwingConstants.CENTER);
+    panelInfo.add(lblCategoria);
+    
+    tarjeta.add(panelInfo, BorderLayout.CENTER);
+    
+    
+    
+        // JPanel para los botones
+    JPanel panelBotones = new JPanel(new FlowLayout());
+    panelBotones.setBackground(new Color(46,49,82));
+    
+    JButton verBtn = new JButton(new ImageIcon(getClass().getResource("/view (1).png"))); // Reemplaza "ver.png" con la ruta de tu imagen
+    verBtn.setPreferredSize(new Dimension(38, 30)); // Ancho: 30, Alto: 30
+    verBtn.setBackground(new Color(188,225,193)); // Establece el fondo en rojo
+    
+    JButton editarBtn = new JButton(new ImageIcon(getClass().getResource("/edit.png")));
+    editarBtn.setPreferredSize(new Dimension(38, 30)); // Ancho: 30, Alto: 30
+    editarBtn.setBackground(new Color(166,199,245));
+    
+    JButton eliminarBtn = new JButton(new ImageIcon(getClass().getResource("/delete (6).png")));
+    eliminarBtn.setPreferredSize(new Dimension(38, 30)); // Ancho: 30, Alto: 30
+    eliminarBtn.setBackground(new Color(242,174,188));
+    
+    panelBotones.add(verBtn);
+    panelBotones.add(editarBtn);
+    panelBotones.add(eliminarBtn);
+    tarjeta.add(panelBotones, BorderLayout.SOUTH);
+    
+    
+
+    
+
+    principalPanel.add(tarjeta);
+    principalPanel.revalidate();
+    principalPanel.repaint();
+}
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -67,37 +132,14 @@ public class materiales extends javax.swing.JPanel {
         panelprincipal = new javax.swing.JPanel();
         txtBuscar = new RSMaterialComponent.RSTextFieldMaterialIcon();
         btnNuevo = new rojeru_san.RSButtonRiple();
-        jPanel1 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
-        rSButtonRiple1 = new rojeru_san.RSButtonRiple();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
-        rSButtonRiple2 = new rojeru_san.RSButtonRiple();
-        rSButtonRiple3 = new rojeru_san.RSButtonRiple();
+        principalPanel = new javax.swing.JPanel();
         jPanel4 = new javax.swing.JPanel();
-        jLabel13 = new javax.swing.JLabel();
-        rSButtonRiple10 = new rojeru_san.RSButtonRiple();
-        jLabel14 = new javax.swing.JLabel();
-        jLabel15 = new javax.swing.JLabel();
-        jLabel16 = new javax.swing.JLabel();
-        rSButtonRiple11 = new rojeru_san.RSButtonRiple();
-        rSButtonRiple12 = new rojeru_san.RSButtonRiple();
-        jPanel5 = new javax.swing.JPanel();
-        jLabel17 = new javax.swing.JLabel();
-        rSButtonRiple13 = new rojeru_san.RSButtonRiple();
-        jLabel18 = new javax.swing.JLabel();
-        jLabel19 = new javax.swing.JLabel();
-        jLabel20 = new javax.swing.JLabel();
-        rSButtonRiple14 = new rojeru_san.RSButtonRiple();
-        rSButtonRiple15 = new rojeru_san.RSButtonRiple();
-        panelTargetas = new javax.swing.JPanel();
-        rSComboBox1 = new RSMaterialComponent.RSComboBox();
+        rSComboMetro1 = new rojerusan.RSComboMetro();
 
         setPreferredSize(new java.awt.Dimension(960, 570));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        panelprincipal.setBackground(new java.awt.Color(228, 233, 247));
+        panelprincipal.setBackground(new java.awt.Color(237, 241, 255));
         panelprincipal.setPreferredSize(new java.awt.Dimension(960, 570));
         panelprincipal.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -125,208 +167,21 @@ public class materiales extends javax.swing.JPanel {
         });
         panelprincipal.add(btnNuevo, new org.netbeans.lib.awtextra.AbsoluteConstraints(850, 0, 110, 30));
 
-        jPanel1.setBackground(new java.awt.Color(46, 49, 82));
-        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/mdfimg.jpeg"))); // NOI18N
-        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, 170));
-
-        rSButtonRiple1.setBackground(new java.awt.Color(255, 0, 51));
-        rSButtonRiple1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/delete (1).png"))); // NOI18N
-        rSButtonRiple1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                rSButtonRiple1ActionPerformed(evt);
-            }
-        });
-        jPanel1.add(rSButtonRiple1, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 270, 40, 20));
-
-        jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel2.setText("Categoria: Madera");
-        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 230, -1, -1));
-
-        jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
-        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel3.setText("Codigo: 101");
-        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 170, -1, -1));
-
-        jLabel4.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
-        jLabel4.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel4.setText("Nombre: Mdf");
-        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 200, -1, -1));
-
-        rSButtonRiple2.setBackground(new java.awt.Color(0, 204, 102));
-        rSButtonRiple2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/eye (1).png"))); // NOI18N
-        rSButtonRiple2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                rSButtonRiple2ActionPerformed(evt);
-            }
-        });
-        jPanel1.add(rSButtonRiple2, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 270, 40, 20));
-
-        rSButtonRiple3.setBackground(new java.awt.Color(0, 153, 255));
-        rSButtonRiple3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pencil (1)_1.png"))); // NOI18N
-        rSButtonRiple3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                rSButtonRiple3ActionPerformed(evt);
-            }
-        });
-        jPanel1.add(rSButtonRiple3, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 270, 40, 20));
-
-        panelprincipal.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 60, 210, 300));
+        principalPanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel4.setBackground(new java.awt.Color(46, 49, 82));
         jPanel4.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        principalPanel.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(482, 5, -1, -1));
 
-        jLabel13.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pega-madera-40 (2).jpg"))); // NOI18N
-        jPanel4.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, 170));
+        panelprincipal.add(principalPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 40, 960, 530));
 
-        rSButtonRiple10.setBackground(new java.awt.Color(255, 0, 51));
-        rSButtonRiple10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/delete (1).png"))); // NOI18N
-        rSButtonRiple10.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                rSButtonRiple10ActionPerformed(evt);
-            }
-        });
-        jPanel4.add(rSButtonRiple10, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 270, 40, 20));
-
-        jLabel14.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
-        jLabel14.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel14.setText("Categoria: Madera");
-        jPanel4.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 230, -1, -1));
-
-        jLabel15.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
-        jLabel15.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel15.setText("Codigo: 101");
-        jPanel4.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 170, -1, -1));
-
-        jLabel16.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
-        jLabel16.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel16.setText("Nombre: Mdf");
-        jPanel4.add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 200, -1, -1));
-
-        rSButtonRiple11.setBackground(new java.awt.Color(0, 204, 102));
-        rSButtonRiple11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/eye (1).png"))); // NOI18N
-        rSButtonRiple11.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                rSButtonRiple11ActionPerformed(evt);
-            }
-        });
-        jPanel4.add(rSButtonRiple11, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 270, 40, 20));
-
-        rSButtonRiple12.setBackground(new java.awt.Color(0, 153, 255));
-        rSButtonRiple12.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pencil (1)_1.png"))); // NOI18N
-        rSButtonRiple12.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                rSButtonRiple12ActionPerformed(evt);
-            }
-        });
-        jPanel4.add(rSButtonRiple12, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 270, 40, 20));
-
-        panelprincipal.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 60, 210, 300));
-
-        jPanel5.setBackground(new java.awt.Color(46, 49, 82));
-        jPanel5.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jLabel17.setIcon(new javax.swing.ImageIcon(getClass().getResource("/clavos (3).jpeg"))); // NOI18N
-        jPanel5.add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(-30, 0, 240, 170));
-
-        rSButtonRiple13.setBackground(new java.awt.Color(255, 0, 51));
-        rSButtonRiple13.setIcon(new javax.swing.ImageIcon(getClass().getResource("/delete (1).png"))); // NOI18N
-        rSButtonRiple13.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                rSButtonRiple13ActionPerformed(evt);
-            }
-        });
-        jPanel5.add(rSButtonRiple13, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 270, 40, 20));
-
-        jLabel18.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
-        jLabel18.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel18.setText("Categoria: Madera");
-        jPanel5.add(jLabel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 230, -1, -1));
-
-        jLabel19.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
-        jLabel19.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel19.setText("Codigo: 101");
-        jPanel5.add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 170, -1, -1));
-
-        jLabel20.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
-        jLabel20.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel20.setText("Nombre: Mdf");
-        jPanel5.add(jLabel20, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 200, -1, -1));
-
-        rSButtonRiple14.setBackground(new java.awt.Color(0, 204, 102));
-        rSButtonRiple14.setIcon(new javax.swing.ImageIcon(getClass().getResource("/eye (1).png"))); // NOI18N
-        rSButtonRiple14.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                rSButtonRiple14ActionPerformed(evt);
-            }
-        });
-        jPanel5.add(rSButtonRiple14, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 270, 40, 20));
-
-        rSButtonRiple15.setBackground(new java.awt.Color(0, 153, 255));
-        rSButtonRiple15.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pencil (1)_1.png"))); // NOI18N
-        rSButtonRiple15.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                rSButtonRiple15ActionPerformed(evt);
-            }
-        });
-        jPanel5.add(rSButtonRiple15, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 270, 40, 20));
-
-        panelprincipal.add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 60, 210, 300));
-
-        panelTargetas.setBackground(new java.awt.Color(46, 49, 82));
-        panelprincipal.add(panelTargetas, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 60, 210, 300));
-
-        rSComboBox1.setColorArrow(new java.awt.Color(46, 49, 82));
-        rSComboBox1.setColorBorde(new java.awt.Color(46, 49, 82));
-        rSComboBox1.setColorFondo(new java.awt.Color(46, 49, 82));
-        rSComboBox1.setColorSeleccion(new java.awt.Color(46, 49, 82));
-        rSComboBox1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                rSComboBox1ActionPerformed(evt);
-            }
-        });
-        panelprincipal.add(rSComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 0, 160, 30));
+        rSComboMetro1.setColorArrow(new java.awt.Color(0, 0, 0));
+        rSComboMetro1.setColorBorde(new java.awt.Color(255, 255, 255));
+        rSComboMetro1.setColorFondo(new java.awt.Color(255, 255, 255));
+        panelprincipal.add(rSComboMetro1, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 0, -1, 30));
 
         add(panelprincipal, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
     }// </editor-fold>//GEN-END:initComponents
-
-    private void rSButtonRiple1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rSButtonRiple1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_rSButtonRiple1ActionPerformed
-
-    private void rSButtonRiple2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rSButtonRiple2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_rSButtonRiple2ActionPerformed
-
-    private void rSButtonRiple3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rSButtonRiple3ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_rSButtonRiple3ActionPerformed
-
-    private void rSButtonRiple10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rSButtonRiple10ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_rSButtonRiple10ActionPerformed
-
-    private void rSButtonRiple11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rSButtonRiple11ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_rSButtonRiple11ActionPerformed
-
-    private void rSButtonRiple12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rSButtonRiple12ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_rSButtonRiple12ActionPerformed
-
-    private void rSButtonRiple13ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rSButtonRiple13ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_rSButtonRiple13ActionPerformed
-
-    private void rSButtonRiple14ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rSButtonRiple14ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_rSButtonRiple14ActionPerformed
-
-    private void rSButtonRiple15ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rSButtonRiple15ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_rSButtonRiple15ActionPerformed
 
     private void txtBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtBuscarActionPerformed
         // TODO add your handling code here:
@@ -334,44 +189,22 @@ public class materiales extends javax.swing.JPanel {
 
     private void btnNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNuevoActionPerformed
         nuevoMateriales dialog = new nuevoMateriales(new javax.swing.JFrame(), true);
-        dialog.setLocationRelativeTo(null); // Centra la ventana emergente
-        dialog.setVisible(true); // Muestra la ventana
+        dialog.setLocationRelativeTo(null);
+        dialog.setVisible(true);
+        
+        // After the dialog is closed, check if a material was saved
+               if (dialog.materialGuardado) { // Asumiendo que tienes una variable booleana materialGuardado en el JDialog
+            agregarMaterial(dialog.material); // Asumiendo que tienes una variable material en el JDialog
+        }
     }//GEN-LAST:event_btnNuevoActionPerformed
-
-    private void rSComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rSComboBox1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_rSComboBox1ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private rojeru_san.RSButtonRiple btnNuevo;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel13;
-    private javax.swing.JLabel jLabel14;
-    private javax.swing.JLabel jLabel15;
-    private javax.swing.JLabel jLabel16;
-    private javax.swing.JLabel jLabel17;
-    private javax.swing.JLabel jLabel18;
-    private javax.swing.JLabel jLabel19;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel20;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel4;
-    private javax.swing.JPanel jPanel5;
-    private javax.swing.JPanel panelTargetas;
     private javax.swing.JPanel panelprincipal;
-    private rojeru_san.RSButtonRiple rSButtonRiple1;
-    private rojeru_san.RSButtonRiple rSButtonRiple10;
-    private rojeru_san.RSButtonRiple rSButtonRiple11;
-    private rojeru_san.RSButtonRiple rSButtonRiple12;
-    private rojeru_san.RSButtonRiple rSButtonRiple13;
-    private rojeru_san.RSButtonRiple rSButtonRiple14;
-    private rojeru_san.RSButtonRiple rSButtonRiple15;
-    private rojeru_san.RSButtonRiple rSButtonRiple2;
-    private rojeru_san.RSButtonRiple rSButtonRiple3;
-    private RSMaterialComponent.RSComboBox rSComboBox1;
+    private javax.swing.JPanel principalPanel;
+    private rojerusan.RSComboMetro rSComboMetro1;
     private RSMaterialComponent.RSTextFieldMaterialIcon txtBuscar;
     // End of variables declaration//GEN-END:variables
 }
