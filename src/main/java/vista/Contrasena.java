@@ -42,6 +42,8 @@ public class Contrasena extends javax.swing.JFrame {
         continuar = new rojeru_san.RSButton();
         jLabel8 = new javax.swing.JLabel();
         txtcorreo = new javax.swing.JTextField();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTextArea1 = new javax.swing.JTextArea();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -101,6 +103,12 @@ public class Contrasena extends javax.swing.JFrame {
             }
         });
         jPanel9.add(txtcorreo, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 270, 480, 40));
+
+        jTextArea1.setColumns(20);
+        jTextArea1.setRows(5);
+        jScrollPane1.setViewportView(jTextArea1);
+
+        jPanel9.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 180, -1, -1));
 
         jPanel8.add(jPanel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 30, 520, 580));
 
@@ -203,6 +211,8 @@ public class Contrasena extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel8;
     private javax.swing.JPanel jPanel9;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTextArea jTextArea1;
     private javax.swing.JTextField txtcorreo;
     // End of variables declaration//GEN-END:variables
 }
