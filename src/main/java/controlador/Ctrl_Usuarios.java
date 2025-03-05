@@ -9,8 +9,8 @@ import modelo.Consulta_Usuarios;
 
 public class Ctrl_Usuarios {
 
-    private static final String REMITENTE = "carpinteriajoseabel2025@gmail.com"; 
-    private static final String CLAVE_REMITENTE = "cmiu jrxl ppkd ubyp";
+    private static final String REMITENTE = "yurimallerlygomezlizcano@gmail.com"; 
+    private static final String CLAVE_REMITENTE = "tytn wqbp klqv ntsw";
 
     public boolean enviarCodigoRecuperacion(String usuario, String correo) {
         Consulta_Usuarios consulta = new Consulta_Usuarios();
